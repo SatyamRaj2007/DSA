@@ -2,11 +2,11 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) {
         int freq=0,ans=0;
-        for(int i=0;i<nums.size();i++){
+        for(int num:nums){
             if(freq==0){
-                ans=nums[i];
+                ans=num;
             }
-            if(ans==nums[i]){
+            if(num==ans){
                 freq++;
             }else{
                 freq--;
