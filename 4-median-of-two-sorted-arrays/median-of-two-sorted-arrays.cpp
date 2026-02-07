@@ -1,38 +1,36 @@
 class Solution {
 public:
-    double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
-         if (a.size() > b.size())
-            return findMedianSortedArrays(b, a);
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int n = nums1.size();
+        int m = nums2.size();
+        int i = 0, j = 0;
+        int m1 = 0, m2 = 0;
 
-        int n1 = a.size();
-        int n2 = b.size();
-        int low = 0, high = n1;
+        // Traverse till middle of merged array
+        for (int count = 0; count <= (n + m) / 2; count++) {
+            m2 = m1;
 
-        while (low <= high) {
-            int cut1 = (low + high) / 2;
-            int cut2 = (n1 + n2 + 1) / 2 - cut1;
-
-            int l1 = (cut1 == 0) ? INT_MIN : a[cut1 - 1];
-            int r1 = (cut1 == n1) ? INT_MAX : a[cut1];
-
-            int l2 = (cut2 == 0) ? INT_MIN : b[cut2 - 1];
-            int r2 = (cut2 == n2) ? INT_MAX : b[cut2];
-
-            if (l1 <= r2 && l2 <= r1) {
-                if ((n1 + n2) % 2 == 0) {
-                    return (max(l1, l2) + min(r1, r2)) / 2.0;
+            if (i < n && j < m) {
+                if (nums1[i] <= nums2[j]) {
+                    m1 = nums1[i++];
                 } else {
-                    return max(l1, l2);
+                    m1 = nums2[j++];
                 }
             }
-            else if (l1 > r2) {
-                high = cut1 - 1;
+            else if (i < n) {
+                m1 = nums1[i++];
             }
             else {
-                low = cut1 + 1;
+                m1 = nums2[j++];
             }
         }
-        return 0.0;
-        
+
+        // If total length is odd
+        if ((n + m) % 2 == 1) {
+            return (double)m1;
+        }
+
+        // If total length is even
+        return (m1 + m2) / 2.0;
     }
 };
