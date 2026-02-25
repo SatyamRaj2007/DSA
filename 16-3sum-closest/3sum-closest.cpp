@@ -4,16 +4,22 @@ public:
         sort(nums.begin(), nums.end());
         int n = nums.size();
         
-        int closestSum = nums[0] + nums[1] + nums[2];
+        long long closestSum = (long long)nums[0] + nums[1] + nums[2];
         
         for(int i = 0; i < n - 2; i++) {
+            
+            if(i > 0 && nums[i] == nums[i - 1]) continue;
+            
             int left = i + 1;
             int right = n - 1;
             
             while(left < right) {
-                int currentSum = nums[i] + nums[left] + nums[right];
                 
-                if(abs(target - currentSum) < abs(target - closestSum)) {
+                long long currentSum = (long long)nums[i] 
+                                     + nums[left] 
+                                     + nums[right];
+                
+                if(llabs(target - currentSum) < llabs(target - closestSum)) {
                     closestSum = currentSum;
                 }
                 
@@ -24,11 +30,11 @@ public:
                     right--;
                 } 
                 else {
-                    return currentSum; 
+                    return target;  
                 }
             }
         }
         
-        return closestSum;
+        return (int)closestSum;
     }
 };
