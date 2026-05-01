@@ -1,40 +1,39 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> ans;
-        int n = nums.size();
+        vector<vector<int>>ans;
+        int  n=nums.size();
+        sort(nums.begin(),nums.end());
 
-        sort(nums.begin(), nums.end());
-
-        for(int i = 0; i < n - 2; i++) {
-
-            if(i > 0 && nums[i] == nums[i - 1])
+        for(int i=0;i<n-2;i++){
+            if(i>0&&nums[i]==nums[i-1]){
                 continue;
+            }
 
-            int left = i + 1;
-            int right = n - 1;
+            int m1=i+1;
+            int m2=n-1;
 
-            while(left < right) {
-                int sum = nums[i] + nums[left] + nums[right];
+            while(m1<m2){
+                int sum=nums[i]+nums[m1]+nums[m2];
 
-                if(sum == 0) {
-                    ans.push_back({nums[i], nums[left], nums[right]});
+                if(sum==0){
+                    ans.push_back({nums[i],nums[m1],nums[m2]});
 
-                    while(left < right && nums[left] == nums[left + 1]) left++;
-                    while(left < right && nums[right] == nums[right - 1]) right--;
+                    while(m1<m2 && nums[m1]==nums[m1+1])m1++;
+                    while(m1<m2 && nums[m2]==nums[m2-1])m2--;
 
-                    left++;
-                    right--;
-                }
-                else if(sum < 0) {
-                    left++;   
-                }
-                else {
-                    right--;  
+                    m1++;
+                    m2--;
+                }else if(sum<0){
+                    m1++;
+                }else{
+                    m2--;
                 }
             }
+        
         }
 
         return ans;
+        
     }
 };
