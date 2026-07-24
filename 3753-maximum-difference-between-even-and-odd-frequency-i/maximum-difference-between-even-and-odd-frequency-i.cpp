@@ -3,7 +3,7 @@ public:
     int maxDifference(string s) {
         unordered_map<char,int>c;
         for(char ch:s){
-            ++c[ch];
+            c[ch]++;
         }
         int max_a1=1, min_a2=s.size();
 
