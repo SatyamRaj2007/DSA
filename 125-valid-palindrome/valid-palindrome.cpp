@@ -3,7 +3,6 @@ public:
     bool isPalindrome(string s) {
         
         int n=s.size();
-        
         string str1;
         string str2;
         for(int i=0;i<n;i++){
@@ -16,7 +15,7 @@ public:
         str2=str1;
         int start=0;
         int end=str2.size()-1;
-        while(start<=end){
+        while(start<end){
             swap(str2[start++],str2[end--]);
         }
 
