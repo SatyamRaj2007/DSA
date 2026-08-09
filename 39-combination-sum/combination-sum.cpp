@@ -1,27 +1,33 @@
 class Solution {
 public:
     vector<vector<int>> ans;
-    vector<int> path;
 
-    void dfs(vector<int>& candidates, int target, int idx) {
+    void solve(vector<int>& candidates, int target, vector<int>& temp, int index) {
+
         if (target == 0) {
-            ans.push_back(path);
+            ans.push_back(temp);
             return;
         }
 
-        for (int i = idx; i < candidates.size(); i++) {
+        for (int i = index; i < candidates.size(); i++) {
+
             if (candidates[i] > target)
                 continue;
 
-            path.push_back(candidates[i]);
-            dfs(candidates, target - candidates[i], i); // reuse same number
-            path.pop_back();
+            temp.push_back(candidates[i]);
+
+            solve(candidates, target - candidates[i], temp, i);
+
+            temp.pop_back();
         }
     }
 
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        sort(candidates.begin(), candidates.end());
-        dfs(candidates, target, 0);
+
+        vector<int> temp;
+
+        solve(candidates, target, temp, 0);
+
         return ans;
     }
 };
