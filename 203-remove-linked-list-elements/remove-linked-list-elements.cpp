@@ -11,17 +11,14 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-
-        // Remove matching nodes from the beginning
         while(head != NULL && head->val == val) {
             ListNode* temp = head;
             head = head->next;
             delete temp;
         }
 
-        // Remove matching nodes after head
         ListNode* temp = head;
-
+        
         while(temp != NULL && temp->next != NULL) {
 
             if(temp->next->val == val) {
